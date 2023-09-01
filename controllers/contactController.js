@@ -28,7 +28,7 @@ const createContact = asyncHandler(async (req, res) => {
 //@route GET /api/contacts/:id
 //@access public
 
-const getContact = asyncHanddler(async (req, res) => {
+const getContact = asyncHandler(async (req, res) => {
     res.status(200).json({ mesage: `Get contact for ${req.params.id}` })
 })
 
