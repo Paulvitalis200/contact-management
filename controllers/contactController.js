@@ -1,45 +1,55 @@
+const asyncHandler = require("express-async-handler")
+
 //@desc Get all contacts
 //@route GET /api/contacts
 //@access public
 
-const getContacts = (req, res) => {
-    res.status(200).json({mesage: "Get all contacts"})
-}
+const getContacts = asyncHandler(async (req, res) => {
+    res.status(200).json({ mesage: "Get all contacts" })
+})
 
 //@desc Create New contact
 //@route POST /api/contacts
 //@access public
 
-const createContact = (req, res) => {
-    res.status(200).json({mesage: "Create Contact"})
-}
+const createContact = asyncHandler(async (req, res) => {
+    console.log(req.body)
+    // We need to install middleweare called jsson
+    const { name, email, phone } = req.body
+
+    if (!name || !email || !phone) {
+        res.status(400)
+        throw new Error("All fields are mandatory")
+    }
+    res.status(200).json({ mesage: "Create Contact" })
+})
 
 //@desc Get contact
 //@route GET /api/contacts/:id
 //@access public
 
-const getContact = (req, res) => {
-    res.status(200).json({mesage: `Get contact for ${req.params.id}`})
-}
+const getContact = asyncHanddler(async (req, res) => {
+    res.status(200).json({ mesage: `Get contact for ${req.params.id}` })
+})
 
 
 //@desc Update contact
 //@route PUT /api/contacts/:id
 //@access public
 
-const updateContact = (req, res) => {
-    res.status(200).json({mesage: `Update contact for ${req.params.id}`})
-}
+const updateContact = asyncHandler(async (req, res) => {
+    res.status(200).json({ mesage: `Update contact for ${req.params.id}` })
+})
 
 
 //@desc Delete contact
 //@route DELETE /api/contacts/:id
 //@access public
 
-const deleteContact = (req, res) => {
-    res.status(200).json({mesage: `Delete contact ${req.params.id}`})
-}
+const deleteContact = asyncHandler(async (req, res) => {
+    res.status(200).json({ mesage: `Delete contact ${req.params.id}` })
+})
 
 
 
-module.exports = {getContacts, createContact, getContact, updateContact, deleteContact}
+module.exports = { getContacts, createContact, getContact, updateContact, deleteContact }
