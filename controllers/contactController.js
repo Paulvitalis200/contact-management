@@ -19,11 +19,15 @@ const createContact = asyncHandler(async (req, res) => {
     // We need to install middleweare called jsson
     const { name, email, phone } = req.body
 
+    
     if (!name || !email || !phone) {
         res.status(400)
         throw new Error("All fields are mandatory")
     }
-    res.status(200).json({ mesage: "Create Contact" })
+    const contact = await Contact.create({
+        name, email, phone
+    })
+    res.status(201).json(contact)
 })
 
 //@desc Get contact
